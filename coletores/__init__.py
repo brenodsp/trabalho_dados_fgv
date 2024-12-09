@@ -1,0 +1,1 @@
+from .ColetorFinanceiroYahoo import ColetorFinanceiroYahoo
