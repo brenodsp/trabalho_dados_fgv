@@ -1,0 +1,1 @@
+from .YahooFinancialCollector import YahooFinancialCollector
