@@ -3,6 +3,7 @@ from .ColetorFinanceiro import ColetorFinanceiro
 import pandas as pd
 import yfinance as yf
 
+
 class ColetorFinanceiroYahoo(ColetorFinanceiro):
     def __init__(self, ticker: str):
         super().__init__()
