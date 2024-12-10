@@ -1,6 +1,4 @@
-from collectors import YahooFinancialCollector
+from base_de_dados import DadosBaseYahoo
 
 
-if __name__ == '__main__':
-    teste = YahooFinancialCollector('AAPL').financial_infos
-    a = 0
+dados = DadosBaseYahoo().df
