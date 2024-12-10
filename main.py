@@ -8,5 +8,3 @@ dados = DadosBaseYahoo().df
 # Calcular clusters e expô-los em um DataFrame
 num_clusters = 4
 clusters = Clusterizador(dados).clusterizar(num_clusters)
-
-a = 0
