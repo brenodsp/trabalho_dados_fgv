@@ -11,21 +11,10 @@ class ColetorFinanceiro(abc.ABC):
     @property
     @abc.abstractmethod
     def _dados_financeiros_anualizados(self) -> pd.DataFrame:
-        """
-        TODO: 
-        - Calcular endividamento baseado nos ativos e na receita, fluxo de caixa livre (normalizar pelo EBITDA), 
-        caixa (normalizado por EBITDA), Market Cap.
-        - Pegar métricas dos últimos 4 anos (deixar anos como indice do DataFrame).
-        """
-        pass
+       pass
 
     @property
     def score_financeiro(self) -> pd.DataFrame:
-        """
-        TODO: 
-        - Pesar anos de forma decrescente (Peso 4 para última medição e 1 para a mais antiga) e fazer a média ponderada.
-        - Métricas nas colunas e nome da empresa no índice.
-        """
         # Determinar peso de cada ano
         pesos = range(3, 0, -1)
         peso_total = sum([i for i in pesos])
