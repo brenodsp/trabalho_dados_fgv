@@ -1,6 +1,8 @@
 from .DadosBase import DadosBase
 from coletores import ColetorFinanceiroYahoo
 
+import datetime
+
 import pandas as pd
 
 
@@ -30,7 +32,7 @@ class DadosBaseYahoo(DadosBase):
         scores = []
         for ticker in self.EMPRESAS:
             empresa = ColetorFinanceiroYahoo(ticker)
-            print(f"Calculando score da empresa '{empresa.NOME_EMPRESA}'")
+            print(f"[{datetime.datetime.now()}] Calculando score da empresa '{empresa.NOME_EMPRESA}'")
 
             score = ColetorFinanceiroYahoo(ticker).score_financeiro
             scores.append(score)
