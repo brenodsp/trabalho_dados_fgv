@@ -1,5 +1,7 @@
 from .ColetorFinanceiro import ColetorFinanceiro
 
+import time
+
 import pandas as pd
 import yfinance as yf
 
@@ -30,6 +32,9 @@ class ColetorFinanceiroYahoo(ColetorFinanceiro):
         passivos = self._balanco_financeiro_info['TotalLiabilitiesNetMinorityInterest']
         caixa = self._balanco_financeiro_info['CashAndCashEquivalents']
         num_acoes = self._ticker_obj.info['sharesOutstanding']
+
+        # Pegar informação do preço da ação (essa consulta é muito inconstante, por isso ela será realizada múltiplas vezes até retornar resultados ou então ela falha)
+        historico_precos = self._historico_precos
         preco_acao = self._pegar_preco_fechamento_anual(self._ticker_obj.history(period="5y", interval="1mo")['Close'])
         
         # Calcular métricas
@@ -67,6 +72,18 @@ class ColetorFinanceiroYahoo(ColetorFinanceiro):
         df.index = df.index.year
         
         return df[(df.index >= self._ANO_INICIAL) & (df.index <= self._ANO_FINAL)]
+    
+    @property
+    def _historico_precos(self) -> pd.Series:
+        for i in range(100):
+            series = self._ticker_obj.history(period="5y", interval="1mo")['Close']
+            if series.isnull().sum() == 0:
+                return series
+            time.sleep(3)
+        
+        raise ValueError("Consulta instável, retornando valores nulos.")
+            
+
     
     def _pegar_preco_fechamento_anual(self, serie_preco: pd.Series) -> pd.Series:
         """
