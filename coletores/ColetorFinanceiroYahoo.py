@@ -5,6 +5,9 @@ import yfinance as yf
 
 
 class ColetorFinanceiroYahoo(ColetorFinanceiro):
+    _ANO_INICIAL = 2021
+    _ANO_FINAL = 2023
+
     def __init__(self, ticker: str):
         super().__init__()
         self._ticker = ticker
@@ -49,24 +52,23 @@ class ColetorFinanceiroYahoo(ColetorFinanceiro):
         df = self._ticker_obj.get_cashflow().T
         df.index = df.index.year
         
-        return df.iloc[:4, :]
+        return df[(df.index >= self._ANO_INICIAL) & (df.index <= self._ANO_FINAL)]
     
     @property
     def _demonstrativo_financeiro_info(self) -> pd.DataFrame:
         df = self._ticker_obj.get_financials().T
         df.index = df.index.year
         
-        return df.iloc[:4, :]
+        return df[(df.index >= self._ANO_INICIAL) & (df.index <= self._ANO_FINAL)]
     
     @property
     def _balanco_financeiro_info(self) -> pd.DataFrame:
         df = self._ticker_obj.get_balance_sheet().T
         df.index = df.index.year
         
-        return df.iloc[:4, :]
+        return df[(df.index >= self._ANO_INICIAL) & (df.index <= self._ANO_FINAL)]
     
-    @staticmethod
-    def _pegar_preco_fechamento_anual(serie_preco: pd.Series) -> pd.Series:
+    def _pegar_preco_fechamento_anual(self, serie_preco: pd.Series) -> pd.Series:
         """
         Pegar o preço de fechamento do ano para os anos anteriores, e o preço mais recente para o ano atual.
 
@@ -75,8 +77,12 @@ class ColetorFinanceiroYahoo(ColetorFinanceiro):
         """
         serie_preco_ajustada = serie_preco[serie_preco.index.month == 12]
         serie_preco_ajustada.index = serie_preco_ajustada.index.year
+        serie_preco_ajustada = serie_preco_ajustada[
+            (serie_preco_ajustada.index >= self._ANO_INICIAL) &
+            (serie_preco_ajustada.index <= self._ANO_FINAL)
+        ]
 
-        return serie_preco_ajustada.sort_index(ascending=False).iloc[:4]
+        return serie_preco_ajustada.sort_index(ascending=False)
     
     @staticmethod
     def _agregar_metricas_anualizadas(

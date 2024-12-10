@@ -27,7 +27,7 @@ class ColetorFinanceiro(abc.ABC):
         - Métricas nas colunas e nome da empresa no índice.
         """
         # Determinar peso de cada ano
-        pesos = range(4, 0, -1)
+        pesos = range(3, 0, -1)
         peso_total = sum([i for i in pesos])
         df = self._dados_financeiros_anualizados
         df['peso'] = pesos
