@@ -8,7 +8,7 @@ import sklearn.cluster as skl_cluster
 
 class Clusterizador:
     def __init__(self, dados: DadosBase):
-        self._dados = dados
+        self._dados = dados.df.set_index('NOME_EMPRESA')
 
     def clusterizar(self, num_clusters: int, estado_randomico: int = 42) -> pd.DataFrame:
         print(f"[{datetime.datetime.now()}] Realizando clusterização com o algoritmo KMeans...")

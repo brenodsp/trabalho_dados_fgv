@@ -6,11 +6,11 @@ import os
 
 
 # Declarar a base de dados utilizada
-dados = DadosBaseYahoo().df
+dados = DadosBaseYahoo()
 
 # Calcular clusters e expô-los em um DataFrame
 num_clusters = 4
-clusters = Clusterizador(dados.set_index('NOME_EMPRESA')).clusterizar(num_clusters)
+clusters = Clusterizador(dados).clusterizar(num_clusters)
 
 # Determinar local de escrita das saídas
 subpasta = 'saidas'
