@@ -2,3 +2,4 @@ setuptools==75.6.0
 pandas==2.2.3
 scikit-learn==1.5.2
 yfinance==0.2.50
+matplotlib==3.10.0
