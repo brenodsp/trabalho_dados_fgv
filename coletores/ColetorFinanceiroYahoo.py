@@ -40,6 +40,7 @@ class ColetorFinanceiroYahoo(ColetorFinanceiro):
         # Calcular métricas
         endividamento_ativos = self._calcular_endividamento_ativos(passivos, ativos)
         endividamento_receita = self._calcular_endividamento_receita(passivos, receita)
+        endividamento_ebitda = self._calcular_endividamento_ebitda(passivos, ebitda)
         fluxo_caixa_normalizado = self._calcular_fluxo_caixa_livre_normalizado(fluxo_caixa, ebitda)
         caixa_normalizado = self._calcular_caixa_normalizado(caixa, ebitda)
         market_cap = self._calcular_market_cap(preco_acao, num_acoes)
@@ -47,6 +48,7 @@ class ColetorFinanceiroYahoo(ColetorFinanceiro):
         return self._agregar_metricas_anualizadas(
             endividamento_ativos,
             endividamento_receita,
+            endividamento_ebitda,
             fluxo_caixa_normalizado,
             caixa_normalizado,
             market_cap
@@ -105,11 +107,12 @@ class ColetorFinanceiroYahoo(ColetorFinanceiro):
     def _agregar_metricas_anualizadas(
         endividamento_ativos: pd.Series,
         endividamento_receita: pd.Series,
+        endividamento_ebitda: pd.Series,
         fluxo_caixa_normalizado: pd.Series,
         caixa_normalizado: pd.Series,
         market_cap: pd.Series
     ) -> pd.DataFrame:
         return pd.concat(
-            [endividamento_ativos, endividamento_receita, fluxo_caixa_normalizado, caixa_normalizado, market_cap],
+            [endividamento_ativos, endividamento_receita, endividamento_ebitda, fluxo_caixa_normalizado, caixa_normalizado, market_cap],
             axis=1
         )

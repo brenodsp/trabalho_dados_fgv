@@ -37,6 +37,9 @@ class ColetorFinanceiro(abc.ABC):
     def _calcular_endividamento_receita(self, total_passivos: pd.Series, receita: pd.Series) -> pd.Series:
         return self._atribuir_nome_serie(total_passivos.div(receita), MetricasEnum.DIVIDA_RECEITA)
     
+    def _calcular_endividamento_ebitda(self, total_passivos: pd.Series, ebitda: pd.Series) -> pd.Series:
+        return self._atribuir_nome_serie(total_passivos.div(ebitda), MetricasEnum.DIVIDA_EBITDA)
+    
     def _calcular_fluxo_caixa_livre_normalizado(self, fluxo_caixa_livre: pd.Series, ebitda: pd.Series) -> pd.Series:
         return self._atribuir_nome_serie(fluxo_caixa_livre.div(ebitda), MetricasEnum.FLUXO_CAIXA_LIVRE)
     
