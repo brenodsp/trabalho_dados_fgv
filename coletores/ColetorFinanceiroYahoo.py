@@ -42,7 +42,7 @@ class ColetorFinanceiroYahoo(ColetorFinanceiro):
         endividamento_ebitda = self._calcular_endividamento_ebitda(passivos, ebitda)
         fluxo_caixa_normalizado = self._calcular_fluxo_caixa_livre_normalizado(fluxo_caixa, ebitda)
         caixa_normalizado = self._calcular_caixa_normalizado(caixa, ebitda)
-        market_cap = self._calcular_market_cap(preco_acao, num_acoes)
+        market_cap = self._calcular_market_cap(preco_acao, num_acoes, ebitda)
 
         return self._agregar_metricas_anualizadas(
             endividamento_ativos,

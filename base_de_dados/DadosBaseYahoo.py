@@ -68,7 +68,6 @@ class DadosBaseYahoo(DadosBase):
         super().__init__()
 
 
-    @property
     def _construir_base_de_dados(self, path_base_dados: str) -> pd.DataFrame:        
         # Criar DataFrame da base de dados completa
         scores = []
