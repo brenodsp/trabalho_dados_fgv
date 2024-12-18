@@ -28,6 +28,7 @@ class ColetorFinanceiro(abc.ABC):
         # Ajustar formato do DataFrame
         df_final = total_df.to_frame().T
         df_final.index = [self.NOME_EMPRESA]
+        df_final = df_final.reset_index().rename(columns={'index': 'NOME_EMPRESA'})
 
         return df_final
 
