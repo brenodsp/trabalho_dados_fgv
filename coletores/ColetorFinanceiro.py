@@ -2,6 +2,7 @@ from .enums import MetricasEnum
 
 import abc
 
+import numpy as np
 import pandas as pd
 
 
@@ -47,8 +48,8 @@ class ColetorFinanceiro(abc.ABC):
     def _calcular_caixa_normalizado(self, caixa: pd.Series, ebitda: pd.Series) -> pd.Series:
         return self._atribuir_nome_serie(caixa.div(ebitda), MetricasEnum.CAIXA)
     
-    def _calcular_market_cap(self, preco_acao: pd.Series, num_acoes: int) -> pd.Series:
-        return self._atribuir_nome_serie(preco_acao * num_acoes, MetricasEnum.MARKET_CAP)
+    def _calcular_market_cap(self, preco_acao: pd.Series, num_acoes: int, ebitda: pd.Series) -> pd.Series:
+        return self._atribuir_nome_serie((preco_acao * num_acoes).apply(lambda x: np.log(x)), MetricasEnum.MARKET_CAP)
     
     @staticmethod
     def _atribuir_nome_serie(serie: pd.Series, enum_metrica: MetricasEnum) -> pd.Series:
