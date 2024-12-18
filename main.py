@@ -9,7 +9,7 @@ dados = DadosBaseYahoo().df
 
 # Calcular clusters e expô-los em um DataFrame
 num_clusters = 4
-clusters = Clusterizador(dados).clusterizar(num_clusters)
+clusters = Clusterizador(dados.set_index('NOME_EMPRESA')).clusterizar(num_clusters)
 
 # Determinar local de escrita das saídas
 subpasta = 'saidas'
@@ -20,4 +20,4 @@ caminho_completo = os.path.join(subpasta, arquivo_csv)
 os.makedirs(subpasta, exist_ok=True)
 
 # Escrever o DataFrame em CSV na subpasta, sobrescrevendo o arquivo se ele já existir
-clusters.to_csv(caminho_completo, index=False)
+clusters.reset_index().to_csv(caminho_completo, index=False)
