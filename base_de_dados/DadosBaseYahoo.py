@@ -8,7 +8,7 @@ import pandas as pd
 
 class DadosBaseYahoo(DadosBase):
     """
-    Empresas: Apple, Microsoft, Hershey's, Gamestop, Walmart, Boeing, Coca Cola, Cameco, Pfizer, Ralph Lauren, GM.
+    Todas as empresas do S&P500 (17/12/2024).
     """
     EMPRESAS = [
         "AAPL", "MSFT", "NVDA", "AMZN", "META", "TSLA", "AVGO", "GOOGL", "GOOG", "BRK.B",
