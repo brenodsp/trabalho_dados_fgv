@@ -1,5 +1,6 @@
 from base_de_dados import DadosBaseYahoo
 from clusterizacao import Clusterizador
+from saidas.GeradorDeGraficos import GeradorDeGraficos
 
 import os
 
@@ -21,3 +22,6 @@ os.makedirs(subpasta, exist_ok=True)
 
 # Escrever o DataFrame em CSV na subpasta, sobrescrevendo o arquivo se ele já existir
 clusters.reset_index().to_csv(caminho_completo, index=False)
+
+# Apresentar gráficos
+graficos = GeradorDeGraficos(clusters).gerar_graficos
