@@ -7,3 +7,8 @@ class MetricasEnum(enum.Enum):
     FLUXO_CAIXA_LIVRE = enum.auto()
     CAIXA = enum.auto()
     MARKET_CAP = enum.auto()
+
+class GrupoMetricasEnum(enum.Enum):
+    ENDIVIDAMENTO = [MetricasEnum.DIVIDA_ATIVO.name, MetricasEnum.DIVIDA_RECEITA.name, MetricasEnum.DIVIDA_EBITDA.name]
+    LIQUIDEZ = [MetricasEnum.FLUXO_CAIXA_LIVRE.name, MetricasEnum.CAIXA.name]
+    ESCALA = [MetricasEnum.MARKET_CAP.name]
