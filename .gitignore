@@ -5,3 +5,4 @@ teste.py
 *.png
 *.jpg
 *.jpeg
+.venv/
